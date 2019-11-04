@@ -22,3 +22,5 @@ SELECT * FROM doctor;
 
 DELETE FROM doctor WHERE specialty = 'Surgeon';
 -- these rows are deleted because the constraint in treats is ON DELETE CASCADE, after a row in doctor which is a foreign key in treats was deleted, the row in treats which has the licensenum as foreign key is also auto-deleted.
+
+SELECT * FROM doctor;
