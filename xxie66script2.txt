@@ -1,4 +1,5 @@
 SHOW DATABASES;
+
 USE xxie66assign2db;
 
 
