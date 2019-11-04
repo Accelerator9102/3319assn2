@@ -24,7 +24,7 @@ Empty set (0.00 sec)
 LOAD DATA LOCAL INFILE "loaddatafall2019.txt" INTO TABLE xxie66assign2db.patient FIELDS TERMINATED BY ','
 --------------
 
-Query OK, 6 rows affected (0.01 sec)
+Query OK, 6 rows affected (0.07 sec)
 Records: 6  Deleted: 0  Skipped: 0  Warnings: 0
 
 --------------
@@ -66,13 +66,13 @@ Query OK, 1 row affected (0.01 sec)
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("GD56","Joey","Shabado","Podiatrist","1960-06-24")
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.06 sec)
 
 --------------
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("HT45","Ross","Clooney","Surgeon","1987-06-20")
 --------------
 
-Query OK, 1 row affected (0.15 sec)
+Query OK, 1 row affected (0.02 sec)
 
 --------------
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("YT67","Ben","Spock","Pediatrician","1955-02-20")
@@ -84,13 +84,13 @@ Query OK, 1 row affected (0.01 sec)
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("JK78","Mandy","Webster","Surgeon","1990-08-08")
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("SE66","Colleen","Aziz","Surgeon","1989-08-24")
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO doctor (licensenum, fname, lname, specialty, datelicensed) VALUES("AE86","Rachel","Green","Orthodontist","1969-05-05")
@@ -131,7 +131,7 @@ Query OK, 1 row affected (0.01 sec)
 INSERT INTO hospital (hospitalcode, name, city, province, bednum) VALUES("ABC","Victoria","London","On","1600")
 --------------
 
-Query OK, 1 row affected (0.10 sec)
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 INSERT INTO hospital (hospitalcode, name, city, province, bednum) VALUES("DDE","Victoria","Victoria","BC","1200")
@@ -156,7 +156,7 @@ SELECT * FROM hospital
 UPDATE doctor SET hospitalcode = 'BBC' WHERE licensenum = 'RD34'
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.18 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -170,7 +170,7 @@ Rows matched: 1  Changed: 1  Warnings: 0
 UPDATE doctor SET hospitalcode = 'DDE' WHERE licensenum = 'HT45'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -198,7 +198,7 @@ Rows matched: 1  Changed: 1  Warnings: 0
 UPDATE doctor SET hospitalcode = 'ABC' WHERE licensenum = 'AE86'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -222,21 +222,21 @@ SELECT * FROM doctor
 UPDATE hospital SET licensenum = 'GD56', datebecamehead = '1999-09-10' WHERE hospitalcode ='BBC'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.16 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE hospital SET licensenum = 'SE66', datebecamehead = '1994-12-05' WHERE hospitalcode ='ABC'
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE hospital SET licensenum = 'YT67', datebecamehead = '1997-12-07' WHERE hospitalcode ='DDE'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -291,14 +291,14 @@ SELECT * FROM treats
 UPDATE patient SET lname = 'Brown' WHERE OHIPnumber = '111222111'
 --------------
 
-Query OK, 1 row affected (0.02 sec)
+Query OK, 1 row affected (0.03 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE treats SET licensenum = (SELECT licensenum FROM doctor WHERE doctor.lname = 'Clooney') WHERE licensenum IN (SELECT licensenum FROM doctor WHERE doctor.lname ='Spock')
 --------------
 
-Query OK, 3 rows affected (0.01 sec)
+Query OK, 3 rows affected (0.00 sec)
 Rows matched: 3  Changed: 3  Warnings: 0
 
 --------------

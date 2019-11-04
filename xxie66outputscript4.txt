@@ -1,52 +1,144 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1046 (3D000) at line 1: No database selected
-ERROR 1046 (3D000) at line 3: No database selected
-ERROR 1046 (3D000) at line 5: No database selected
-ERROR 1046 (3D000) at line 7: No database selected
-ERROR 1046 (3D000) at line 9: No database selected
-ERROR 1046 (3D000) at line 11: No database selected
-ERROR 1046 (3D000) at line 13: No database selected
-ERROR 1046 (3D000) at line 15: No database selected
-ERROR 1046 (3D000) at line 17: No database selected
-ERROR 1046 (3D000) at line 19: No database selected
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| vetoffice          |
+| xxie66assign2db    |
++--------------------+
+5 rows in set (0.00 sec)
+
 --------------
 DELETE FROM doctor WHERE datelicensed < 1965-01-01
 --------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 --------------
 CREATE VIEW v AS SELECT patient.fname, patient.lname AS patientlname, doctor.lname AS doctorlname, hospital.name FROM patient INNER JOIN treats ON patient.OHIPnumber = treats.OHIPnumber INNER JOIN doctor ON treats.licensenum = doctor.licensenum INNER JOIN hospital ON doctor.licensenum = hospital.licensenum WHERE hospital.datebecamehead >1995-12-31
 --------------
 
+Query OK, 0 rows affected (0.01 sec)
+
 --------------
 SELECT * FROM v
 --------------
+
++---------+--------------+-------------+-----------+
+| fname   | patientlname | doctorlname | name      |
++---------+--------------+-------------+-----------+
+| Jon     | Green        | Aziz        | Victoria  |
+| Bill    | Gellar       | Shabado     | St.Joseph |
+| Colleen | Gellar       | Shabado     | St.Joseph |
+| Scotty  | Bing         | Shabado     | St.Joseph |
++---------+--------------+-------------+-----------+
+4 rows in set, 1 warning (0.00 sec)
 
 --------------
 SELECT * FROM doctor
 --------------
 
++------------+---------+------------+--------------+--------------+--------------+
+| licensenum | fname   | lname      | specialty    | datelicensed | hospitalcode |
++------------+---------+------------+--------------+--------------+--------------+
+| AE86       | Rachel  | Green      | Orthodontist | 1969-05-05   | ABC          |
+| GD56       | Joey    | Shabado    | Podiatrist   | 1960-06-24   | BBC          |
+| HT45       | Ross    | Clooney    | Surgeon      | 1987-06-20   | DDE          |
+| JK78       | Mandy   | Webster    | Surgeon      | 1990-08-08   | BBC          |
+| RD34       | Bernie  | Kavorikian | Urologist    | 1980-09-09   | BBC          |
+| SE66       | Colleen | Aziz       | Surgeon      | 1989-08-24   | ABC          |
+| YT67       | Ben     | Spock      | Pediatrician | 1955-02-20   | DDE          |
++------------+---------+------------+--------------+--------------+--------------+
+7 rows in set (0.00 sec)
+
 --------------
 SELECT * FROM treats
 --------------
+
++------------+------------+
+| OHIPnumber | licensenum |
++------------+------------+
+| 919991216  | AE86       |
+| 110112113  | GD56       |
+| 333444555  | GD56       |
+| 667766777  | GD56       |
+| 111222111  | HT45       |
+| 111222333  | HT45       |
+| 444555666  | HT45       |
+| 667766777  | HT45       |
+| 111222333  | JK78       |
+| 444555666  | JK78       |
+| 667766777  | JK78       |
+| 111222333  | SE66       |
++------------+------------+
+12 rows in set (0.00 sec)
 
 --------------
 DELETE FROM doctor WHERE lname = 'Clooney'
 --------------
 
+Query OK, 1 row affected (0.01 sec)
+
 --------------
 SELECT * FROM doctor
 --------------
+
++------------+---------+------------+--------------+--------------+--------------+
+| licensenum | fname   | lname      | specialty    | datelicensed | hospitalcode |
++------------+---------+------------+--------------+--------------+--------------+
+| AE86       | Rachel  | Green      | Orthodontist | 1969-05-05   | ABC          |
+| GD56       | Joey    | Shabado    | Podiatrist   | 1960-06-24   | BBC          |
+| JK78       | Mandy   | Webster    | Surgeon      | 1990-08-08   | BBC          |
+| RD34       | Bernie  | Kavorikian | Urologist    | 1980-09-09   | BBC          |
+| SE66       | Colleen | Aziz       | Surgeon      | 1989-08-24   | ABC          |
+| YT67       | Ben     | Spock      | Pediatrician | 1955-02-20   | DDE          |
++------------+---------+------------+--------------+--------------+--------------+
+6 rows in set (0.00 sec)
 
 --------------
 SELECT * FROM treats
 --------------
 
++------------+------------+
+| OHIPnumber | licensenum |
++------------+------------+
+| 919991216  | AE86       |
+| 110112113  | GD56       |
+| 333444555  | GD56       |
+| 667766777  | GD56       |
+| 111222333  | JK78       |
+| 444555666  | JK78       |
+| 667766777  | JK78       |
+| 111222333  | SE66       |
++------------+------------+
+8 rows in set (0.00 sec)
+
 --------------
 SELECT * FROM doctor
 --------------
 
++------------+---------+------------+--------------+--------------+--------------+
+| licensenum | fname   | lname      | specialty    | datelicensed | hospitalcode |
++------------+---------+------------+--------------+--------------+--------------+
+| AE86       | Rachel  | Green      | Orthodontist | 1969-05-05   | ABC          |
+| GD56       | Joey    | Shabado    | Podiatrist   | 1960-06-24   | BBC          |
+| JK78       | Mandy   | Webster    | Surgeon      | 1990-08-08   | BBC          |
+| RD34       | Bernie  | Kavorikian | Urologist    | 1980-09-09   | BBC          |
+| SE66       | Colleen | Aziz       | Surgeon      | 1989-08-24   | ABC          |
+| YT67       | Ben     | Spock      | Pediatrician | 1955-02-20   | DDE          |
++------------+---------+------------+--------------+--------------+--------------+
+6 rows in set (0.00 sec)
+
 --------------
 DELETE FROM doctor WHERE specialty = 'Surgeon'
 --------------
+
+Query OK, 2 rows affected (0.01 sec)
 
 Bye
