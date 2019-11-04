@@ -1,0 +1,109 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| vetoffice          |
++--------------------+
+4 rows in set (0.00 sec)
+
+--------------
+DROP DATABASE IF EXISTS xxie66assign2db
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE DATABASE xxie66assign2db
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT ALL PRIVILEGES ON xxie66assign2db.* TO 'ta'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+CREATE TABLE doctor(licensenum CHAR(4), fname VARCHAR(20), lname VARCHAR(20), specialty VARCHAR(20), datelicensed date, hospitalcode CHAR(3), PRIMARY KEY(licensenum))
+--------------
+
+Query OK, 0 rows affected (0.24 sec)
+
+--------------
+CREATE TABLE hospital(hospitalcode CHAR(3), name VARCHAR(20), city VARCHAR(20), province VARCHAR(20), bednum CHAR(4), licensenum CHAR(4), datebecamehead date, PRIMARY KEY(hospitalcode), FOREIGN KEY(licensenum) REFERENCES doctor(licensenum) ON DELETE SET NULL)
+--------------
+
+Query OK, 0 rows affected (0.33 sec)
+
+--------------
+ALTER TABLE doctor ADD FOREIGN KEY (hospitalcode) REFERENCES hospital(hospitalcode) ON DELETE SET NULL
+--------------
+
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+CREATE TABLE patient(OHIPnumber CHAR(9), fname VARCHAR(20), lname VARCHAR(20), PRIMARY KEY (OHIPnumber))
+--------------
+
+Query OK, 0 rows affected (0.18 sec)
+
+--------------
+CREATE TABLE treats(OHIPnumber CHAR(9), licensenum CHAR(4), FOREIGN KEY (OHIPnumber) REFERENCES patient(OHIPnumber) ON DELETE CASCADE,  FOREIGN KEY (licensenum) REFERENCES doctor(licensenum) ON DELETE CASCADE , PRIMARY KEY(OHIPnumber, licensenum))
+--------------
+
+Query OK, 0 rows affected (0.07 sec)
+
+--------------
+SHOW TABLES
+--------------
+
++---------------------------+
+| Tables_in_xxie66assign2db |
++---------------------------+
+| doctor                    |
+| hospital                  |
+| patient                   |
+| treats                    |
++---------------------------+
+4 rows in set (0.00 sec)
+
+Bye

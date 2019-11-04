@@ -1,0 +1,91 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1046 (3D000) at line 2: No database selected
+ERROR 1046 (3D000) at line 6: No database selected
+ERROR 1046 (3D000) at line 10: No database selected
+ERROR 1046 (3D000) at line 16: No database selected
+ERROR 1046 (3D000) at line 22: No database selected
+ERROR 1046 (3D000) at line 28: No database selected
+ERROR 1046 (3D000) at line 34: No database selected
+ERROR 1046 (3D000) at line 41: No database selected
+ERROR 1046 (3D000) at line 47: No database selected
+ERROR 1046 (3D000) at line 51: No database selected
+ERROR 1046 (3D000) at line 61: No database selected
+ERROR 1046 (3D000) at line 68: No database selected
+ERROR 1046 (3D000) at line 74: No database selected
+--------------
+SELECT patient.lname FROM patient
+--------------
+
+--------------
+SELECT DISTINCT patient.lname FROM patient
+--------------
+
+--------------
+SELECT * 
+	FROM doctor 
+	ORDER BY doctor.lname
+--------------
+
+--------------
+SELECT name, hospitalcode 
+	FROM hospital 
+	WHERE bednum > 1500
+--------------
+
+--------------
+SELECT a.lname, a.fname 
+	FROM doctor AS a 
+	WHERE hospitalcode IN (SELECT hospitalcode FROM hospital WHERE name = 'St.Joseph')
+--------------
+
+--------------
+SELECT patient.fname, patient.lname 
+	FROM patient 
+	WHERE patient.lname LIKE 'G%'
+--------------
+
+--------------
+SELECT a.fname, a.lname 
+	FROM patient AS a 
+	WHERE OHIPnumber IN 
+	(SELECT OHIPnumber FROM treats WHERE licensenum IN (SELECT licensenum FROM doctor WHERE doctor.lname = 'Clooney'))
+--------------
+
+--------------
+SELECT name, city, doctor.lname 
+	FROM hospital, doctor 
+	WHERE hospital.licensenum = doctor.licensenum
+--------------
+
+--------------
+SELECT SUM(bednum) AS 'Total Number of Beds' FROM hospital
+--------------
+
+--------------
+SELECT patient.fname, doctor.fname
+    FROM patient
+        INNER JOIN treats
+            ON patient.OHIPnumber = treats.OHIPnumber
+        INNER JOIN doctor
+            ON treats.licensenum = doctor.licensenum
+    WHERE doctor.licensenum IN (SELECT licensenum FROM hospital)
+--------------
+
+--------------
+SELECT doctor.lname, doctor.fname 
+	FROM doctor 
+	WHERE (hospitalcode IN (SELECT hospitalcode FROM hospital WHERE name = 'Victoria')) 
+	AND (doctor.specialty = 'Surgeon')
+--------------
+
+--------------
+SELECT doctor.fname 
+	FROM doctor 
+	WHERE doctor.licensenum NOT IN (SELECT licensenum FROM treats)
+--------------
+
+--------------
+SELECT doctor.lname, doctor.fname FROM doctor INNER JOIN treats ON doctor.licensenum = treats.licensenum INNER JOIN patient ON treats.OHIPnumber = patient.OHIPnumber GROUP BY doctor.licensenum HAVING COUNT(doctor.licensenum)>1
+--------------
+
+Bye
